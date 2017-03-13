@@ -1,0 +1,27 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: services.yml }
+
+parameters:
+    locale: en
+
+framework:
+    #esi:             ~
+    #translator:      { fallbacks: ["%locale%"] }
+    secret:          "%secret%"
+    default_locale:  "%locale%"
+
+monolog:
+    handlers:
+        error:
+            type:   stream
+            path:   "%kernel.logs_dir%/error.%kernel.environment%.log"
+            level:  error
+            bubble: false
+        warning:
+            type:   stream
+            path:   "%kernel.logs_dir%/warning.%kernel.environment%.log"
+            level:  warning
+            bubble: false
+        console:
+            type:  console

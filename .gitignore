@@ -1,0 +1,5 @@
+.idea/
+vendor/
+var/
+app/config/config_*.yml
+app/config/parameters.yml
