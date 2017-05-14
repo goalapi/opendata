@@ -1,0 +1,7 @@
+services:
+    app.goalapi_listener.load:
+        class: GoalAPI\OpenData\Bundle\AppBundle\EventDispatcher\EventListener\DataLoadListener
+        tags:
+            - { name: kernel.event_listener, event: goalapi.load, method: onDataLoad }
+        calls:
+        - ['setDataPath', ['%goalapi.opendata.datapath%']]

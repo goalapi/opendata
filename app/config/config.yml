@@ -4,12 +4,16 @@ imports:
 
 parameters:
     locale: en
+    goalapi.opendata.datapath: '%kernel.root_dir%/../var/data'
 
 framework:
     #esi:             ~
     #translator:      { fallbacks: ["%locale%"] }
     secret:          "%secret%"
     default_locale:  "%locale%"
+
+goalapi:
+    apikey: '%goalapi.apikey%'
 
 monolog:
     handlers:
