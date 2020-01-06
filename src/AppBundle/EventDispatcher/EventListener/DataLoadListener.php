@@ -6,7 +6,7 @@
  *
  */
 
-namespace GoalAPI\OpenData\Bundle\AppBundle\EventDispatcher\EventListener;
+namespace App\AppBundle\EventDispatcher\EventListener;
 
 use GoalAPI\SDKBundle\GoalAPISDK\CallPerformer;
 use GoalAPI\SDKBundle\GoalAPISDK\EventDispatcher\Event\GoalAPISDKEvent;
@@ -29,7 +29,6 @@ class DataLoadListener
 
     /**
      * @param GoalAPISDKEvent $event
-     * @return null
      */
     public function onDataLoad(GoalAPISDKEvent $event)
     {

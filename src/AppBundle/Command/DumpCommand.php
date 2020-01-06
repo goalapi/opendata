@@ -6,7 +6,7 @@
  *
  */
 
-namespace GoalAPI\OpenData\Bundle\AppBundle\Command;
+namespace App\AppBundle\Command;
 
 use GoalAPI\SDKBundle\GoalAPISDK;
 use GoalAPI\SDKBundle\Model;
@@ -22,6 +22,11 @@ use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 class DumpCommand extends Command implements ContainerAwareInterface
 {
     use ContainerAwareTrait;
+
+    /**
+     * @var GoalAPISDK
+     */
+    private $sdk;
 
     public function configure()
     {
@@ -40,7 +45,8 @@ class DumpCommand extends Command implements ContainerAwareInterface
         $this->setupOutputPath($input, $output);
 
         /** @var GoalAPISDK $sdk */
-        $sdk = $this->container->get('goalapi.sdk');
+        $sdk = $this->sdk;
+
         $tournamentsFromInput = $input->getArgument('tournaments');
         foreach ($this->getTournaments($sdk) as $tournament) {
             if (sizeof($tournamentsFromInput) && !in_array($tournament->getId(), $tournamentsFromInput)) {
@@ -59,6 +65,14 @@ class DumpCommand extends Command implements ContainerAwareInterface
                 }
             }
         }
+    }
+
+    /**
+     * @param GoalAPISDK $sdk
+     */
+    public function setSdk(GoalAPISDK $sdk): void
+    {
+        $this->sdk = $sdk;
     }
 
     /**
@@ -128,13 +142,13 @@ class DumpCommand extends Command implements ContainerAwareInterface
         Model\Stage $stage
     ) {
         $stageFromAPI = $sdk->getStage($tournament, $season, $stage->getId());
+        $sdk->getMatches($tournament, $season, $stage);
         if ($stageFromAPI->hasStandings()) {
             $sdk->getStandings($tournament, $season, $stage);
         }
         foreach ($this->getSquads($sdk, $tournament, $season, $stage) as $squad) {
             $sdk->getSquad($tournament, $season, $stage, $squad->getTeam());
         }
-        $sdk->getMatches($tournament, $season, $stage);
     }
 
     /**
