@@ -10,7 +10,6 @@ namespace App\AppBundle\Command;
 
 use GoalAPI\SDKBundle\GoalAPISDK;
 use GoalAPI\SDKBundle\Model;
-use GoalAPI\SDKBundle\SDK\Exception\SDKException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -55,16 +54,14 @@ class DumpCommand extends Command implements ContainerAwareInterface
             $sdk->getTournament($tournament->getId());
             foreach ($this->getSeasons($sdk, $tournament) as $season) {
                 $sdk->getSeason($tournament, $season->getId());
-                try {
-                    foreach ($this->getStages($sdk, $tournament, $season) as $stage) {
-                        $this->processStage($sdk, $tournament, $season, $stage);
-                        $output->writeln($stage->getId().'::'.$stage->getName());
-                    }
-                } catch (SDKException $x) {
-                    $output->writeln($x->getMessage());
+                foreach ($this->getStages($sdk, $tournament, $season) as $stage) {
+                    $this->processStage($sdk, $tournament, $season, $stage);
+                    $output->writeln($stage->getId().'::'.$stage->getName());
                 }
             }
         }
+
+        return 0;
     }
 
     /**
@@ -146,9 +143,9 @@ class DumpCommand extends Command implements ContainerAwareInterface
         if ($stageFromAPI->hasStandings()) {
             $sdk->getStandings($tournament, $season, $stage);
         }
-        foreach ($this->getSquads($sdk, $tournament, $season, $stage) as $squad) {
-            $sdk->getSquad($tournament, $season, $stage, $squad->getTeam());
-        }
+//        foreach ($this->getSquads($sdk, $tournament, $season, $stage) as $squad) {
+//            $sdk->getSquad($tournament, $season, $stage, $squad->getTeam());
+//        }
     }
 
     /**
