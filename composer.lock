@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/goalapi/symfony-sdk.git",
-                "reference": "be03917cbf5d681e83a62e1c10e0aa9b7ac24382"
+                "reference": "d18588bca25615a3dbb92290510e6d65f9997046"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/goalapi/symfony-sdk/zipball/be03917cbf5d681e83a62e1c10e0aa9b7ac24382",
-                "reference": "be03917cbf5d681e83a62e1c10e0aa9b7ac24382",
+                "url": "https://api.github.com/repos/goalapi/symfony-sdk/zipball/d18588bca25615a3dbb92290510e6d65f9997046",
+                "reference": "d18588bca25615a3dbb92290510e6d65f9997046",
                 "shasum": ""
             },
             "require": {
@@ -61,7 +61,7 @@
                 "source": "https://github.com/goalapi/symfony-sdk/tree/master",
                 "issues": "https://github.com/goalapi/symfony-sdk/issues"
             },
-            "time": "2020-01-06 23:24:20"
+            "time": "2020-01-07 00:07:16"
         },
         {
             "name": "guzzlehttp/guzzle",
