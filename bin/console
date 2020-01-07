@@ -8,8 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\ErrorHandler\Debug;
 
-require_once __DIR__.'/../app/autoload.php';
-require_once __DIR__.'/../app/AppKernel.php';
+require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/../src/AppKernel.php';
 
 $input = new ArgvInput();
 $env = $input->getParameterOption(array('--env', '-e'), getenv('SYMFONY_ENV') ?: 'dev');

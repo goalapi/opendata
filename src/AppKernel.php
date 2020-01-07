@@ -22,7 +22,7 @@ class AppKernel extends Kernel
 
     function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $configToLoad = __DIR__.'/config/config_'.$this->getEnvironment().'.yml';
+        $configToLoad = $this->getProjectDir().'/config/config_'.$this->getEnvironment().'.yml';
         if (!is_readable($configToLoad)) {
             $configToLoad = __DIR__.'/config/config.yml';
         }
